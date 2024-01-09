@@ -16,6 +16,10 @@ Args :: struct {
 	frameworks_dir: Maybe(string),
 }
 
+fix_spaces :: #force_inline proc(path: string) -> string {
+	return strings.concatenate({"\"", path, "\""})
+}
+
 main :: proc() {
 	if len(os.args) < 3 || (os.args[1] != "app" && os.args[1] != "bundle") {
 		fmt.println("Usage: macbundler <app-or-bundle> [options]")
@@ -59,21 +63,21 @@ main :: proc() {
 	// copy the icon
 	if args.icon_dir != nil {
 		icon_path := slashpath.join({resources_path, "icon.icns"})
-		libc.system(strings.clone_to_cstring(strings.concatenate({"cp ", args.icon_dir.?, " ", icon_path})))
+		libc.system(strings.clone_to_cstring(strings.concatenate({"cp ", fix_spaces(args.icon_dir.?), " ", fix_spaces(icon_path)})))
 	}
 
 	// copy the assets
 	if args.assets_dir != nil {
-		libc.system(strings.clone_to_cstring(strings.concatenate({"cp -r ", slashpath.join({args.assets_dir.?, "*"}), " ", resources_path})))
+		libc.system(strings.clone_to_cstring(strings.concatenate({"cp -r ", slashpath.join({fix_spaces(args.assets_dir.?), "*"}), " ", fix_spaces(resources_path)})))
 	}
 
 	// copy the frameworks
 	if args.frameworks_dir != nil {
-		libc.system(strings.clone_to_cstring(strings.concatenate({"cp -r ", args.frameworks_dir.?, " ", slashpath.join({contents_path, "Frameworks"})})))
+		libc.system(strings.clone_to_cstring(strings.concatenate({"cp -r ", fix_spaces(args.frameworks_dir.?), " ", fix_spaces(slashpath.join({contents_path, "Frameworks"}))})))
 	}
 
 	// copy the binary
-	libc.system(strings.clone_to_cstring(strings.concatenate({"cp ", args.binary_path, " ", macos_path})))
+	libc.system(strings.clone_to_cstring(strings.concatenate({"cp ", fix_spaces(args.binary_path), " ", fix_spaces(macos_path)})))
 
 	fmt.println("All done! Output:", base_path)
 }
