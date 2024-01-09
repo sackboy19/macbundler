@@ -55,9 +55,10 @@ main :: proc() {
 	os.make_directory(macos_path)
 
 	// create Info.plist
-	info_plist, _ := strings.replace(info_plist_template, "{{.BundleName}}", args.bundle_or_app_name, 1)
-	info_plist, _ = strings.replace(info_plist, "{{.AppName}}", slashpath.name(args.binary_path), 1)
-	info_plist, _ = strings.replace(info_plist, "{{.BundleIdentifier}}", args.bundle_identifier, 1)
+	info_plist, _ := strings.replace(info_plist_template, "{{.PackageType}}", args.app_or_bundle == "app" ? "APPL" : "BNDL", 1)
+	info_plist, _  = strings.replace(info_plist, "{{.BundleName}}", args.bundle_or_app_name, 1)
+	info_plist, _  = strings.replace(info_plist, "{{.AppName}}", slashpath.name(args.binary_path), 1)
+	info_plist, _  = strings.replace(info_plist, "{{.BundleIdentifier}}", args.bundle_identifier, 1)
 	os.write_entire_file(slashpath.join({contents_path, "Info.plist"}), transmute([]u8)info_plist)
 
 	// copy the icon
@@ -140,7 +141,7 @@ info_plist_template :: `<?xml version="1.0" encoding="UTF-8"?>
 	<key>CFBundleExecutable</key>
 	<string>{{.AppName}}</string>
 	<key>CFBundlePackageType</key>
-	<string>APPL</string>
+	<string>{{.PackageType}}</string>
 	<key>CFBundleIconFile</key>
 	<string>icon.icns</string>
 	<key>CFBundleIdentifier</key>
