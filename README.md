@@ -39,7 +39,7 @@ Example:
 ./macbundler app -name "My app" -binary myapp -bundle-identifier com.example -use-plist Info.plist
 ```
 
-# Code signing / settings rpaths / universal binaries
+# Code signing / setting rpaths / universal binaries
 Maybe I will support this later, however it is outside of the scope of what this simple program is for.
 This program is mainly just a small tool to help me generate a .app file for my current project I'm working on.
 I don't want to put too much work into this tool because Platin21 is working on adding a macOS bundler to the Odin compiler itself, which would fully handle all those features and more.
