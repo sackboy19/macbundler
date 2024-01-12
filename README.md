@@ -32,8 +32,8 @@ Example:
 ```sh
 ./macbundler app -name "My app" -binary myapp -bundle-identifier com.example -only-plist
 ```
-3. Make the changes you want to the Info.plist file that was generated for you.
-4. Then you can use macbundler again with the `-use-plist` command and supply it the path to that Info.plist file.
+2. Make the changes you want to the Info.plist file that was generated for you.
+3. Then you can use macbundler again with the `-use-plist` command and supply it the path to that Info.plist file.
 Example:
 ```sh
 ./macbundler app -name "My app" -binary myapp -bundle-identifier com.example -use-plist Info.plist
