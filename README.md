@@ -1,5 +1,12 @@
 Small helper program to bundle your macOS binaries into a .app or .bundle file.
 
+# READ ME!!
+This was mostly written for fun, it is pretty useless and just adds another step to your build process.
+I reccommend you just make your own plist and then use this: https://gist.github.com/sackboy19/012a83d5aec55a7c00542c4a2cb3ca98
+So you just have a single shell script building your program
+
+# 
+
 Usage:
 ```sh
 ./macbundler
@@ -24,9 +31,6 @@ Usage:
 ```
 
 # How to customize Info.plist?
-Why? Because there is a lot of different keys you can put in the Info.plist, and I'm not going to support all of them.
-For example a useful key is the CFBundleSupportedPlatforms key. With that you can specify what platforms your App runs on.
-
 1. You can use the `-only-plist` flag to tell macbundler to only generate an Info.plist file.
 Example:
 ```sh
@@ -41,5 +45,3 @@ Example:
 
 # Code signing / setting rpaths / universal binaries
 Maybe I will support this later, however it is outside of the scope of what this simple program is for.
-This program is mainly just a small tool to help me generate a .app file for my current project I'm working on.
-I don't want to put too much work into this tool because Platin21 is working on adding a macOS bundler to the Odin compiler itself, which would fully handle all those features and more.
